@@ -1,0 +1,54 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Вход";
+}
+
+<h1 class="login-register-title">@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <form id="account" method="post">
+                <hr class="login-register-hr"/>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="login-register-label">Имейл</label>
+                    <input class="login-register-input-email" asp-for="Input.Email" class="form-control" />
+                    <span class="login-register-span" asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="login-register-label">Парола</label>
+                    <input class="login-register-input-pass" asp-for="Input.Password" class="form-control" />
+                    <span class="login-register-span" asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label class="login-register-label" asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            <span class="login-register-span">Запомни ме?</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="login-register-btn" type="submit" class="btn btn-primary">Вход</button>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <a class="login-register-a" id="forgot-password" asp-page="./ForgotPassword">Забравена парола?</a>
+                    </p>
+                    <p>
+                        <a class="login-register-a" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Регистрация</a>
+                    </p>
+                    <p>
+                        <a class="login-register-a" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Повторно изпращане на имейл за потвърждение</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

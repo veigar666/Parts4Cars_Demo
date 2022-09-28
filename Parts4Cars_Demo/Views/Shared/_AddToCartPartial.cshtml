@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.Extensions.Logging;
+@using Parts4Cars_Demo.Data;
+@using Parts4Cars_Demo.Models;
+@using System;
+@using System.Collections.Generic;
+@using System.Diagnostics;
+@using System.Linq;
+@using System.Security.Claims;
+@using System.Threading.Tasks;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext dataContext
+@model Part
+@{
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var partsInCart = dataContext.AppUsers.Where(c => c.Id == userId).SelectMany(c => c.Cart).ToList();
+}
+@if (SignInManager.IsSignedIn(User) && !partsInCart.Contains(Model))
+{
+    <form asp-controller="Home" asp-action="AddToCart">
+        <button type="submit" class="btn-add-to-cart" onclick="return AddToCart(@Model.ID)">
+            <i class="fa-solid fa-cart-shopping"> Добави</i>
+        </button>
+    </form>
+}
+else if(SignInManager.IsSignedIn(User) && partsInCart.Contains(Model))
+{
+    <form asp-controller="Home" asp-action="RemoveFromCart">
+        <button type="submit" class="btn-remove-from-cart" onclick="return RemoveFromCart(@Model.ID)">
+            <i class="fa-solid fa-cart-shopping"> Премахни</i>
+        </button>
+    </form>
+}

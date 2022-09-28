@@ -1,0 +1,151 @@
+﻿@model ICollection<Part>
+
+@{
+    string shortName = "";
+}
+
+<div class="body-left-menu">
+    <ul>
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="">Всички</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Двигател">Двигател</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Каросерия">Каросерия</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Ходова част">Ходова част</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Окачване">Окачване</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Масла">Масла</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Гуми">Гуми</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Спирачна система">Спирачна система</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Джанти">Джанти</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Аудио">Аудио</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Интериор">Интериор</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Екстериор">Екстериор</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Казанчета">Казанчета</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Светлини">Светлини</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Кори и пластмаси">Кори и пластмаси</button>
+        </li>
+        <hr class="body-left-menu-hr">
+        <li>
+                <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Други">Други</button>
+        </li>
+    </ul>
+</div>
+<div class="body-main">
+    <div class="category-dropdown">
+  <button onclick="CategoryDropdown()" class="category-dropbtn"><i class="fa-solid fa-bars"></i></button>
+  <div id="category-dropdown-content" class="category-dropdown-content">
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="">Всички</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Двигател">Двигател</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Каросерия">Каросерия</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Ходова част">Ходова част</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Окачване">Окачване</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Масла">Масла</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Гуми">Гуми</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Спирачна система">Спирачна система</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Джанти">Джанти</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Аудио">Аудио</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Интериор">Интериор</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Екстериор">Екстериор</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Казанчета">Казанчета</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Светлини">Светлини</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Кори и пластмаси">Кори и пластмаси</button>
+    <button class="body-left-menu-option" type="submit" onclick="search_Category(this.value)" value="Други">Други</button>
+  </div>
+</div>
+    <form class="body-main-search" asp-controller="Home" asp-action="Index" method="get">
+        <select id="searchCarMake" onchange="search_makeAndModel()" name="SearchCarMake" class="car-brand">
+            <option value="">Марка</option>
+            <option value="Audi">Audi</option>
+            <option value="BMW">BMW</option>
+            <option value="Opel">Opel</option>
+            <option value="Skoda">Skoda</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Peugeot">Peugeot</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Alfa Romeo">Alfa Romeo</option>
+            <option value="Fiat">Fiat</option>
+            <option value="Seat">Seat</option>
+        </select>
+        <select id="searchCarModel" name="SearchCarModel" class="car-model">
+            <option value="">Модел</option>
+        </select>
+        <input type="submit" class="body-main-search-submit" value="Търсене">
+    </form>
+    <partial name="_MakeMeAdminPartial" />
+    <div class="body-main-products">
+        @foreach (var part in Model)
+        {
+        <a asp-controller="Home" asp-action="Details" asp-route-id="@part.ID">
+            <div class="body-main-products-product">
+                <div class="body-main-products-product-img">
+                    @if(part.Images == null)
+                    {
+                        <img src="~/images/noimage.jpg" alt="Picture">
+                    }
+                    else
+                    {
+                        <img src="@part.Images.ToList()[0].Url" alt="Picture">
+                    }
+                </div>@if(part.Name.Length > 17)
+                    {
+                            char[] shortNameArray = new char[17]; 
+                            for(int i=0; i < 17; i++)
+                            {
+                                shortNameArray[i] = part.Name[i];
+                            }
+                        shortName = new string(shortNameArray);
+                        shortName += "...";
+                    }
+                    else
+                    {
+                        shortName = part.Name;
+                    }
+                    <h2 class="part-name">@shortName</h2>
+                <span>@part.Price лв.</span>
+                <p class="part-category">@part.Category</p>
+            </div>
+        </a>
+        }
+    </div>
+</div>

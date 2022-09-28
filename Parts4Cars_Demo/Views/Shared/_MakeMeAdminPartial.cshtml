@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Parts4Cars_Demo.Data;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext dataContext
+@{
+    int numOfAdmins = dataContext.UserRoles.Where(r => r.RoleId == "23c1997a-e0f2-4c17-8ff0-e52a1193ab0c").Count();
+}
+@if (numOfAdmins == 0 && SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin") == false)
+{ 
+    <button class="make-me-admin-btn" type="submit" asp-controller="Home" asp-action="MakeMeAdmin" onclick="return MakeMeAdmin()">Направи ме администратор!!!</button>
+}

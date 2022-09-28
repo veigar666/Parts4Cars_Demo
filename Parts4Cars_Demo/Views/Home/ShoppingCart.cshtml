@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.Extensions.Logging;
+@using Parts4Cars_Demo.Data;
+@using Parts4Cars_Demo.Models;
+@using System;
+@using System.Collections.Generic;
+@using System.Diagnostics;
+@using System.Linq;
+@using System.Security.Claims;
+@using System.Threading.Tasks;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext dataContext
+@{
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var partsInCart = dataContext.AppUsers.Where(c => c.Id == userId).SelectMany(c => c.Cart).ToList();
+    decimal sum = 0;
+}
+@model ICollection<Part>
+
+    <h2 class="shopping-cart-header">Количка</h2>
+<hr class="shopping-cart-hr"/>
+<div class="shopping-cart-outter-table-div">
+<table class="shopping-cart-table">
+    <tr>
+            <th>Снимка</th>
+            <th>Име</th>
+            <th>Марка</th>
+            <th>Марка на автомобила</th>
+            <th>Модел на автомобила</th>
+            <th>Година на автомобила</th>
+            <th>Категория</th>
+            <th>Цена</th>
+    </tr>
+    @foreach (var part in Model)
+    {
+        sum = Decimal.Add(sum, (decimal)part.Price);
+        <tr>
+            @if (part.Images != null)
+            {
+                <td onclick="trClick(@part.ID)"><img src="@part.Images.ToList()[0].Url" alt="Picture"></td>
+            }
+            else
+            {
+                <td onclick="trClick(@part.ID)"><img src="~/images/noimage.jpg" alt="Picture"></td>
+            }
+            <td onclick="trClick(@part.ID)">@part.Name</td>
+            <td onclick="trClick(@part.ID)">@part.PartMake</td>
+            <td onclick="trClick(@part.ID)">@part.CarMake</td>
+            <td onclick="trClick(@part.ID)">@part.CarModel</td>
+            <td onclick="trClick(@part.ID)">@part.CarYear</td>
+            <td onclick="trClick(@part.ID)">@part.Category</td>
+            <td onclick="trClick(@part.ID)">@part.Price лв.</td>
+            <td>
+                <button type="submit" class="shopping-cart-btn-remove" onclick="return RemoveFromCart(@part.ID)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </td>
+        </tr>
+    }
+</table>
+</div>
+
+@if (partsInCart.Count != 0)
+{
+    <p class="shopping-cart-sum">Обща сума: @sum лв.</p>
+    <form asp-controller="Home" asp-action="Order" method="get" class="shopping-cart-form-order">
+        <button class="shopping-cart-form-order-btn">Поръчай</button>
+    </form>
+}

@@ -1,0 +1,45 @@
+﻿@model Order
+
+<h2 class="order-header">Поръчка</h2>
+<hr class="order-hr"/>
+
+<form asp-controller="Home" asp-action="Order" method="post" class="shopping-cart-form-order">
+    <table class="order-table">
+    <tr>
+        <td><label class="order-label">Име*</label></td>
+        <td><input asp-for="FirstName" class="order-input" required/></td>
+    </tr>
+    <tr>
+        <td><label class="order-label">Презиме</label></td>
+        <td><input asp-for="SecondName" class="order-input" /></td>
+    </tr>
+    <tr>
+        <td><label class="order-label">Фамилия*</label></td>
+        <td><input asp-for="LastName" class="order-input" required/></td>
+    </tr>
+    <tr>
+        <td><label class="order-label">Имейл</label></td>
+        <td><input asp-for="Email" class="order-input" /></td>
+    </tr>
+    <tr>
+        <td><label class="order-label">Телефонен номер*</label></td>
+        <td><input asp-for="Phone" class="order-input" required/></td>
+    </tr>
+    <tr>
+        <td><label class="order-label">Град*</label></td>
+        <td><input asp-for="City" class="order-input" required/></td>
+    </tr>
+    <tr>
+        <td><label class="order-label">Пощенски код*</label></td>
+        <td><input asp-for="PostalCode" class="order-input" required/></td>
+    </tr>
+    <tr>
+        <td><label class="order-label">Улица и номер*</label></td>
+        <td><input asp-for="Street" class="order-input" required/></td>
+    </tr>
+    </table>
+
+    <p class="order-info">Задължителните полета са маркирани със *.</p>
+
+    <button class="order-btn">Завърши поръчката</button>
+</form>

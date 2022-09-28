@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parts4Cars | Авточасти</title>
+    <link rel="shortcut icon" href="~/images/logo.png">
+    <link rel="stylesheet" type="text/css" href="~/css/site.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/font-awesome/css/all.min.css">
+    <script src="~/js/site.js"></script>
+</head>
+<body>
+    <div class="header">
+        <a class="parts4cars-a" asp-controller="Home" asp-action="Index"><h1>Parts4Cars</h1></a>
+        <ul class="header-menu">
+            <li><a asp-controller="Home" asp-action="Index">Начало</a></li>
+            <li><a asp-controller="Home" asp-action="AboutUs">За нас</a></li>
+            <li><a asp-controller="Home" asp-action="Contacts">Контакти</a></li>
+        </ul>
+        <ul class="header-login-register">
+            <li><partial name="_AdminMenuPartial" /></li>
+            <li><a href="#" class="search-button"><i class="fas fa-search"></i></a></li>
+            <li>|</li>
+            <li><partial name="_LoginPartial" /></li>
+            <li>|</li>
+            <li><partial name="_ShoppingCartPartial" /></li>
+        </ul>
+    </div>
+    <form class="search-bar">
+        <div class="search-input">
+            <input type="text" id="searchName" oninput="search_name()" placeholder="Търсене"/>
+        </div>
+    </form>
+    </div>
+    <hr class="body-hr">
+    <div class="body">
+        @RenderBody()
+    </div>
+    <hr class="body-hr">
+    <div class="footer">
+        <div class="footer-logo-list">
+            <ul>
+                <li class="footer-logo-li1">&copy; Parts4Cars</li>
+                <li class="footer-logo-li2">&copy; Parts4Cars</li>
+                <li class="footer-logo-li3">&copy; Parts4Cars</li>
+                <li class="footer-logo-li4">&copy; Parts4Cars</li>
+                <li class="footer-logo-li5">&copy; Parts4Cars</li>
+            </ul>
+        </div>
+        <div class="footer-about-us">
+            <p>"Parts4Cars" е фирма, която от 15 години се занимава с продажба на авточасти втора употреба. Ние изкупуваме стари коли и предоставяме на нашите клиенти само най-добрите части.</p>
+        </div>
+        <div class="footer-worktime">
+            <ul>
+                <li class="footer-worktime-ul-li1">Работно време:</li>
+                <br>
+                <li>Понеделник - Петък</li>
+                <li>08:00 - 17:00</li>
+                <br>
+                <li>Събота:</li>
+                <li>09:00 - 13:00</li>
+                <br>
+                <li>Неделя:</li>
+                <li>Почивен ден</li>
+            </ul>
+        </div>
+        <div class="footer-menu">
+            <ul>
+                <p>Меню:</p>
+                <li><a asp-controller="Home" asp-action="Index">Начало</a></li>
+                <li><a asp-controller="Home" asp-action="AboutUs">За нас</a></li>
+                <li><a asp-controller="Home" asp-action="Contacts">Контакти</a></li>
+            </ul>
+        </div>
+    </div>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+<script>
+    window.onload = partsInCart();
+</script>
+
+</html>

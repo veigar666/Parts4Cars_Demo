@@ -1,0 +1,37 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<h1 class="login-register-title">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <hr class="login-register-hr"/>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label class="login-register-label">Имейл</label>
+                <input class="login-register-input-email" asp-for="Input.Email" class="form-control" />
+                <span class="login-register-span" asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="login-register-label">Парола</label>
+                <input class="login-register-input-pass-first" asp-for="Input.Password" class="form-control" />
+                <span class="login-register-span" asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="login-register-label">Потвърди парола</label>
+                <input class="login-register-input-pass" asp-for="Input.ConfirmPassword" class="form-control" />
+                <span class="login-register-span" asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button class="login-register-btn" type="submit" class="btn btn-primary">Регистрация</button>
+        </form>
+        <a class="login-register-a" asp-area="Identity" asp-page="/Account/Login">Вече имам акаунт</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

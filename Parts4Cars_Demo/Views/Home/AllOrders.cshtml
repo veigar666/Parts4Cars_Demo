@@ -1,0 +1,69 @@
+﻿@model ICollection<Order>
+
+<h2 class="all-orders-header">Поръчки</h2>
+<hr class="all-orders-hr"/>
+
+@if(Model.Count != 0)
+{
+    <div class="all-orders-outter-table-div">
+<table class="all-orders-main-table">
+        <tr>
+            <th>Дата</th>
+            <th>Име</th>
+            <th>Презиме</th>
+            <th>Фамилия</th>
+            <th>Имейл</th>
+            <th>Телефонен номер</th>
+            <th>Град</th>
+            <th>Пощенски код</th>
+            <th>Улица</th>
+            <th>Обща цена</th>
+            <th>Компоненти на поръчката</th>
+        </tr>
+    @foreach(var order in Model)
+    {
+        <tr>
+            <td>@order.OrderedOn</td>
+            <td>@order.FirstName</td>
+            <td>@order.SecondName</td>
+            <td>@order.LastName</td>
+            <td>@order.Email</td>
+            <td>@order.Phone</td>
+            <td>@order.City</td>
+            <td>@order.PostalCode</td>
+            <td>@order.Street</td>
+            <td>@order.Price</td>
+            <td><table class="all-orders-parts-table">
+            @foreach(var part in order.PartsInOrder)
+            {
+                <tr>
+                    
+                        <td>
+                            @if (part.Images.Count != 0)
+                            {
+                                <img src="@part.Images.ToList()[0].Url" alt="Picture">
+                            }
+                            else
+                            {
+                                <img src="~/images/noimage.jpg" alt="Picture">
+                            }
+                        </td>
+                        <td>@part.Name</td>
+                        <td>@part.PartMake</td>
+                        <td>@part.CarMake</td>
+                        <td>@part.CarModel</td>
+                        <td>@part.CarYear</td>
+                        <td>@part.Price лв.</td>
+                </tr>
+            }
+            </table>
+            <td>
+                <button type="submit" class="shopping-cart-btn-remove" onclick="return RemoveOrder(@order.Id)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </td>
+        </tr>
+    }
+</table>
+</div>
+}

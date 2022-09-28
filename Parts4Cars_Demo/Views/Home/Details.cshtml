@@ -1,0 +1,72 @@
+﻿@model Part
+
+<div class="description-main" onload="showSlides(1)">
+            <div class="slideshow-container" >
+@if (Model.Images != null)
+        {
+            @for (int i = 0; i < Model.Images.ToList().Count; i++)
+            {
+                <div class="mySlides fade">
+                    <div class="numbertext">@(i+1) / @Model.Images.ToList().Count</div>
+                    <img class="description-img" src="@Model.Images.ToList()[i].Url" alt="Picture">
+                </div>
+            }
+
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+        }
+        else
+        {
+            <img class="description-img" src="~/images/noimage.jpg" alt="Picture">
+        }
+    </div>
+<br>
+
+    @if (Model.Images != null)
+    {
+        <div style="text-align:center">
+            @for (int i = 0; i < Model.Images.ToList().Count; i++)
+            {
+                <span class="dot" onclick="currentSlide(@(i+1))"></span>
+            }
+        </div>
+    }
+    <p class="description-name">@Model.Name</p>
+    <partial name="_AddToCartPartial" />
+    <partial name="_EditPartPartial" />
+    <partial name="_DeletePartPartial" />
+    <table class="description-table">
+        <tr>
+            <td>Цена:</td>
+            <td class="description-table-right-td">@Model.Price лв.</td>
+        </tr>
+        <tr>
+            <td>Производител:</td>
+            <td class="description-table-right-td">@Model.PartMake</td>
+        </tr>
+        <tr>
+            <td>Марка на превозното средство:</td>
+            <td class="description-table-right-td">@Model.CarMake</td>
+        </tr>
+        <tr>
+            <td>Модел на превозното средство:</td>
+            <td class="description-table-right-td">@Model.CarModel</td>
+        </tr>
+        <tr>
+            <td>Година на превозното средство:</td>
+            <td class="description-table-right-td">@Model.CarYear</td>
+        </tr>
+        <tr>
+            <td>Категория:</td>
+            <td class="description-table-right-td">@Model.Category</td>
+        </tr>
+        <tr>
+            <td>Описание:</td>
+            <td class="description-table-right-td">@Model.Description</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    window.onload = showSlides(1);
+</script>

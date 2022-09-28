@@ -1,0 +1,44 @@
+﻿@model Part
+
+<h2 class="add-part-header">Добави обява</h2>
+<hr class="add-part-hr"/>
+
+<div class="add-part-main">
+    <form asp-controller="Home" asp-action="AddPart" method="post">
+        <table class="add-part-table">
+            <tr>
+                <td>Име:</td>
+                <td><input type="text" asp-for="Name" required /></td>
+            </tr>
+            <tr>
+                <td>Цена(лв.):</td>
+                <td><input type="text" asp-for="Price" required /></td>
+            </tr>
+            <tr>
+                <td>Производител:</td>
+                <td><input type="text" asp-for="PartMake" required /></td>
+            </tr>
+            <tr>
+                <td>Марка на превозното средство:</td>
+                <td><input type="text" asp-for="CarMake" required /></td>
+            </tr>
+            <tr>
+                <td>Модел на превозното средство:</td>
+                <td><input type="text" asp-for="CarModel" required /></td>
+            </tr>
+            <tr>
+                <td>Година на превозното средство:</td>
+                <td><input type="number" asp-for="CarYear" required /></td>
+            </tr>
+            <tr>
+                <td>Категория:</td>
+                <td><input type="text" asp-for="Category" required /></td>
+            </tr>
+            <tr>
+                <td>Описание:</td>
+                <td><input type="text" asp-for="Description" required /></td>
+            </tr>
+        </table>
+        <button type="submit" class="add-part-btn">Добави</button>
+    </form>
+</div>

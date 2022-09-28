@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+{  
+    <div class="admin-menu-dropdown">
+  <button onclick="AdminMenuDropdown()" class="admin-menu-dropbtn"><i class="fa fa-caret-down"></i></button>
+  <div id="admin-menu-dropdown-content" class="admin-menu-dropdown-content">
+    <a asp-controller="Home" asp-action="AllOrders">Поръчки</a>
+    <a asp-controller="Home" asp-action="AddPart" method="get">Добави обява</a>
+  </div>
+</div>
+}

@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+{  
+    <form asp-controller="Home" asp-action="DeletePart">
+        <button type="submit" class="btn-delete" onclick="return DeletePart(@Model.ID)">
+            <i class="fa-solid fa-xmark"></i> Изтрий
+        </button>
+    </form>
+}
